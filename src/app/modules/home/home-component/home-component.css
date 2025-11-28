@@ -1,0 +1,32 @@
+/* Deixa o menu centralizado perfeitamente */
+.menu-wrapper {
+  min-height: calc(100vh - 70px); /* altura total menos a toolbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card do menu */
+.menu-card {
+  padding: 25px 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px;
+}
+
+.menu-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  background: #f3f4f6;
+}
+
+.menu-card mat-icon {
+  font-size: 45px;
+  color: #0d6efd;
+}
+
+.menu-card p {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}

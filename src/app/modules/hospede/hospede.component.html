@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <h3>Gerenciar Hóspedes</h3>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="mb-4">
+
+    <!-- Nome -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Nome completo" formControlName="nome">
+      <mat-error *ngIf="form.get('nome')?.hasError('required') && (form.get('nome')?.touched || form.get('nome')?.dirty)">
+        O nome é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="form.get('email')?.hasError('required') && (form.get('email')?.touched || form.get('email')?.dirty)">
+        O email é obrigatório
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email') && (form.get('email')?.touched || form.get('email')?.dirty)">
+        Email inválido
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Telefone -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Telefone</mat-label>
+      <input matInput placeholder="Telefone" formControlName="telefone">
+      <mat-error *ngIf="form.get('telefone')?.hasError('required') && (form.get('telefone')?.touched || form.get('telefone')?.dirty)">
+        O telefone é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- CPF -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>CPF</mat-label>
+      <input matInput placeholder="000.000.000-00" formControlName="cpf">
+      <mat-error *ngIf="form.get('cpf')?.hasError('required') && (form.get('cpf')?.touched || form.get('cpf')?.dirty)">
+        O CPF é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botões -->
+    <button mat-raised-button color="primary" type="submit">
+      {{ editUuid ? 'Atualizar' : 'Criar' }}
+    </button>
+    <button *ngIf="editUuid" mat-button (click)="editUuid = null; form.reset()">Cancelar</button>
+
+  </form>
+
+  <hr />
+
+  <h3>Lista de Hóspedes</h3>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full">
+
+    <!-- Nome -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let h">{{ h.nome }}</td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let h">{{ h.email }}</td>
+    </ng-container>
+
+    <!-- Telefone -->
+    <ng-container matColumnDef="telefone">
+      <th mat-header-cell *matHeaderCellDef>Telefone</th>
+      <td mat-cell *matCellDef="let h">{{ h.telefone }}</td>
+    </ng-container>
+
+    <!-- Ações -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let h">
+        <button mat-icon-button color="accent" (click)="editar(h)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletar(h.uuid)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

@@ -1,0 +1,65 @@
+/* Container geral */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Campos de formulário full-width */
+.full {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Botões */
+button {
+  margin-right: 10px;
+}
+
+/* Ícones do Angular Material */
+mat-icon {
+  font-size: 22px;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.mat-header-row, .mat-row {
+  display: flex;
+  align-items: center;
+}
+
+.mat-cell, .mat-header-cell {
+  flex: 1;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Coluna de ações */
+td.mat-cell:last-child, th.mat-header-cell:last-child {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  mat-form-field.full {
+    width: 100%;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  mat-icon {
+    font-size: 20px;
+  }
+}

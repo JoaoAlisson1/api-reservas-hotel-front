@@ -1,0 +1,4 @@
+export enum CargoEnum {
+  RECEPCIONISTA = 'RECEPCIONISTA',
+  GERENTE = 'GERENTE'
+}

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <mat-toolbar color="primary" class="d-flex justify-content-between align-items-center">
+
+    <!-- Esquerda -->
+    <div class="toolbar-left">
+      <span class="fw-bold fs-5">Dormez Hoteis</span>
+    </div>
+
+    <!-- Centro (menu principal) -->
+    <div class="toolbar-center d-none d-md-flex gap-3">
+      <button mat-button routerLink="/home/dashboard">Dashboard</button>
+      <button mat-button routerLink="/home/usuario">Usuários</button>
+      <button mat-button routerLink="/home/funcionario">Funcionários</button>
+      <button mat-button routerLink="/home/hospede">Hóspedes</button>
+      <button mat-button routerLink="/home/reservas">Reservas</button>
+      <button mat-button routerLink="/home/quartos">Quartos</button>
+      <!-- Adicione mais opções futuramente -->
+    </div>
+
+    <!-- Direita (ações rápidas) -->
+    <div class="toolbar-right d-flex gap-3">
+      <button mat-icon-button matTooltip="Página inicial" routerLink="/home/dashboard">
+        <mat-icon>home</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Sair" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+
+  </mat-toolbar>
+
+  <div class="content p-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

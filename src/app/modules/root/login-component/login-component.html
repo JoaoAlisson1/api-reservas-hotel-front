@@ -1,0 +1,51 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="width: 400px;">
+    <h3 class="fw-bold">Dormez Hotéis</h3>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="login" placeholder="Digite seu email">
+        <mat-icon matPrefix>email</mat-icon> <!-- ícone de email -->
+
+        <mat-error *ngIf="form.get('login')?.touched && form.get('login')?.hasError('required')">
+          O email é obrigatório.
+        </mat-error>
+
+        <mat-error *ngIf="form.get('login')?.touched && form.get('login')?.hasError('email')">
+          O email informado é inválido.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Senha -->
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Senha</mat-label>
+        <input matInput [type]="mostrarSenha ? 'text' : 'password'" formControlName="senha" placeholder="Digite sua senha">
+        <mat-icon matPrefix>lock</mat-icon> <!-- ícone de cadeado -->
+
+        <!-- botão de mostrar/ocultar senha -->
+        <button mat-icon-button matSuffix type="button" (click)="mostrarSenha = !mostrarSenha">
+          <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="form.get('senha')?.touched && form.get('senha')?.hasError('required')">
+          A senha é obrigatória.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botão de login -->
+      <button mat-raised-button class="w-100 btn-login" type="submit">
+        <mat-icon class="me-2">login</mat-icon>
+        Entrar
+      </button>
+
+      <!-- Link de registro -->
+      <div class="text-center mt-3">
+        <small>Não tem conta? <a routerLink="/registrar">Crie uma</a></small>
+      </div>
+
+    </form>
+  </div>
+</div>

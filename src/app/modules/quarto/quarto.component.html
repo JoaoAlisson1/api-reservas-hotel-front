@@ -1,0 +1,110 @@
+<div class="container mt-4">
+  <h3>Gerenciar Quartos</h3>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="mb-4">
+
+    <!-- Número do Quarto -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Número do Quarto</mat-label>
+      <input matInput type="number" placeholder="Ex: 101" formControlName="numero" min="1">
+      <mat-error *ngIf="form.get('numero')?.hasError('required') && (form.get('numero')?.touched || form.get('numero')?.dirty)">
+        O número do quarto é obrigatório
+      </mat-error>
+      <mat-error *ngIf="form.get('numero')?.hasError('min') && (form.get('numero')?.touched || form.get('numero')?.dirty)">
+        O número do quarto deve ser maior ou igual a 1
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Tipo do Quarto -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Tipo do Quarto</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option *ngFor="let tipo of TipoQuarto | keyvalue" [value]="tipo.value">
+          {{ tipo.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('tipo')?.hasError('required') && (form.get('tipo')?.touched || form.get('tipo')?.dirty)">
+        O tipo do quarto é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Status do Quarto -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Status do Quarto</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of StatusQuarto | keyvalue" [value]="status.value">
+          {{ status.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.hasError('required') && (form.get('status')?.touched || form.get('status')?.dirty)">
+        O status do quarto é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Diária -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Diária</mat-label>
+      <input matInput type="number" placeholder="Ex: 150.00" formControlName="diaria" min="0.01">
+      <mat-error *ngIf="form.get('diaria')?.hasError('required') && (form.get('diaria')?.touched || form.get('diaria')?.dirty)">
+        A diária é obrigatória
+      </mat-error>
+      <mat-error *ngIf="form.get('diaria')?.hasError('min') && (form.get('diaria')?.touched || form.get('diaria')?.dirty)">
+        A diária deve ser maior que zero
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botões -->
+    <button mat-raised-button color="primary" type="submit">
+      {{ editId !== null ? 'Atualizar' : 'Criar' }}
+    </button>
+    <button *ngIf="editId !== null" mat-button type="button" (click)="editId = null; form.reset()">Cancelar</button>
+  </form>
+
+  <hr />
+
+  <h3>Lista de Quartos</h3>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full">
+
+    <!-- Número -->
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef>Número</th>
+      <td mat-cell *matCellDef="let q">{{ q.numero }}</td>
+    </ng-container>
+
+    <!-- Tipo -->
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let q">{{ q.tipo }}</td>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let q">{{ q.status }}</td>
+    </ng-container>
+
+    <!-- Diária -->
+    <ng-container matColumnDef="diaria">
+      <th mat-header-cell *matHeaderCellDef>Diária</th>
+      <td mat-cell *matCellDef="let q">{{ q.diaria | currency:'BRL':'symbol':'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Ações -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let q">
+        <button mat-icon-button color="accent" (click)="editar(q)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletar(q.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

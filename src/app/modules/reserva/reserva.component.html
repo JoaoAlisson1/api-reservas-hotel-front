@@ -1,0 +1,136 @@
+<div class="container mt-4">
+
+  <h2>Gerenciar Reservas</h2>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="mb-4">
+
+    <!-- Check-in -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Check-in</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="checkIn">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="form.get('checkIn')?.hasError('required') && (form.get('checkIn')?.touched || form.get('checkIn')?.dirty)">
+        O check-in é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Check-out -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Check-out</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="checkOut">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="form.get('checkOut')?.hasError('required') && (form.get('checkOut')?.touched || form.get('checkOut')?.dirty)">
+        O check-out é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Status -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let s of (StatusReserva | keyvalue)" [value]="s.value">
+          {{ s.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.hasError('required') && (form.get('status')?.touched || form.get('status')?.dirty)">
+        O status da reserva é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Funcionário -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Funcionário</mat-label>
+      <mat-select formControlName="funcionarioUuid">
+        <mat-option *ngFor="let f of funcionarios" [value]="f.uuid">
+          {{ f.nome }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('funcionarioUuid')?.hasError('required') && (form.get('funcionarioUuid')?.touched || form.get('funcionarioUuid')?.dirty)">
+        O funcionário é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Quarto -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Quarto</mat-label>
+      <mat-select formControlName="quartoId">
+        <mat-option *ngFor="let q of quartos" [value]="q.id">
+          Nº {{ q.numero }} — {{ q.tipo }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('quartoId')?.hasError('required') && (form.get('quartoId')?.touched || form.get('quartoId')?.dirty)">
+        O quarto é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Hóspedes -->
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Hóspedes</mat-label>
+      <mat-select formControlName="hospedeUUIDs" multiple>
+        <mat-option *ngFor="let h of hospedes" [value]="h.uuid">
+          {{ h.nome }} ({{ h.cpf }})
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('hospedeUUIDs')?.hasError('required') && (form.get('hospedeUUIDs')?.touched || form.get('hospedeUUIDs')?.dirty)">
+        Pelo menos um hóspede deve ser selecionado
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botões -->
+    <button mat-raised-button color="primary">{{ editUuid ? 'Atualizar' : 'Criar' }}</button>
+    <button *ngIf="editUuid" mat-button (click)="editUuid = null; form.reset();">
+      Cancelar
+    </button>
+
+  </form>
+
+  <hr>
+
+  <!-- Lista de Reservas -->
+  <h3>Lista de Reservas</h3>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full">
+
+    <ng-container matColumnDef="checkIn">
+      <th mat-header-cell *matHeaderCellDef>Check-In</th>
+      <td mat-cell *matCellDef="let r">{{ r.checkIn | date:'dd/MM/yyyy HH:mm' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="checkOut">
+      <th mat-header-cell *matHeaderCellDef>Check-Out</th>
+      <td mat-cell *matCellDef="let r">{{ r.checkOut | date:'dd/MM/yyyy HH:mm' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let r">{{ r.status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quarto">
+      <th mat-header-cell *matHeaderCellDef>Quarto</th>
+      <td mat-cell *matCellDef="let r">Nº {{ r.quarto.numero }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="funcionario">
+      <th mat-header-cell *matHeaderCellDef>Funcionário</th>
+      <td mat-cell *matCellDef="let r">{{ r.funcionario.nome }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let r">
+        <button mat-icon-button color="accent" (click)="editar(r)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletar(r.uuid)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  </table>
+</div>

@@ -1,0 +1,86 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Usuario } from '../models/usuario';
+import { DadosAutenticacao, DadosTokenJWT } from '../models/usuario';
+import {ActivatedRoute, Router} from '@angular/router';
+import {env} from '../../environment/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  private readonly TOKEN_KEY = 'auth_token';
+  private readonly USER_KEY = 'auth_user';
+
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  /** Faz login na API */
+  login(dados: DadosAutenticacao) {
+    return this.httpClient.post<DadosTokenJWT>(`${env.apiUrl}/login`, dados);
+  }
+
+  /** Faz logout, removendo token e usuário */
+  logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
+    this.router.navigate(['/login']);
+  }
+
+  /** Armazena o token e decodifica o usuário */
+  setToken(token: string) {
+    localStorage.setItem(this.TOKEN_KEY, token);
+    const user = this.userFromToken(token);
+    if (user) {
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    }
+  }
+
+  /** Recupera token do localStorage */
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  /** Verifica se o usuário está logado */
+  isLogged(): boolean {
+    return !!this.getToken();
+  }
+
+  /** Retorna o usuário armazenado no localStorage */
+  getUser(): Usuario | null {
+    const raw = localStorage.getItem(this.USER_KEY);
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as Usuario;
+    } catch {
+      return null;
+    }
+  }
+
+  /** Decodifica o JWT para extrair dados do usuário */
+  private userFromToken(token: string): Usuario | null {
+    try {
+      const payload = token.split('.')[1];
+      if (!payload) return null;
+      const decoded = JSON.parse(atob(payload));
+      return {
+        id: decoded.sub ? Number(decoded.sub) : undefined,
+        email: decoded.sub ?? undefined,
+        role: decoded.ROLE ?? undefined,
+      } as Usuario;
+    } catch {
+      return null;
+    }
+  }
+
+  /** Redireciona para a página desejada após login */
+  redirect() {
+    this.route.queryParams.subscribe((params) => {
+      const returnUrl = params['returnUrl'] || '/home';
+      this.router.navigateByUrl(returnUrl);
+    });
+  }
+}

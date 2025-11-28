@@ -1,0 +1,21 @@
+.container { /* adaptar CSS dps*/
+  max-width: 900px;
+}
+
+.full {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+mat-icon {
+  font-size: 22px;
+}
+
+button {
+  margin-right: 8px;
+}

@@ -1,0 +1,28 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.full {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.mat-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+/* Destacar os botões de ação */
+button[color="accent"] mat-icon {
+  color: #1976d2; /* azul */
+}
+
+button[color="warn"] mat-icon {
+  color: #d32f2f; /* vermelho */
+}
