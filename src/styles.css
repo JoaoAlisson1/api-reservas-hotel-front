@@ -1,5 +1,5 @@
 /* 1. CORREÇÃO UNIVERSAL DO Z-INDEX */
-/* Garante que o contêiner de todos os pop-ups (overlays) fique no topo de tudo. */
+/* Garante que o contêiner de todos os pop-ups (overlays) . */
 .cdk-overlay-container {
   z-index: 9999 !important;
 }
@@ -12,17 +12,17 @@
   background-color: white !important;
 }
 
-/* Painel de Menu (mat-menu) - Caso você use um menu de contexto no futuro */
+/* Painel de Menu (mat-menu)  */
 .mat-menu-panel {
   background-color: white !important;
 }
 
-/* Painel do Datepicker (mat-datepicker) - Onde funcionou, mantemos para garantia */
+/* Painel do Datepicker (mat-datepicker) */
 .mat-datepicker-popup .mat-datepicker-content {
   background-color: white !important;
 }
 
-/* OPCIONAL: Correção para a div mais interna dos overlays, se o seletor estiver em um ambiente específico */
+
 .cdk-overlay-pane {
   background-color: white; /* Geralmente não precisa de !important aqui */
 }
