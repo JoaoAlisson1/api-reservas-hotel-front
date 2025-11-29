@@ -35,7 +35,7 @@ export class FuncionarioComponent implements OnInit {
 
   form: FormGroup;
 
-  // Agora usando MatTableDataSource para atualizar imediatamente
+  // usando MatTableDataSource para atualizar imediatamente
   dataSource = new MatTableDataSource<FuncionarioResponse>();
 
   displayedColumns: string[] = ['nome', 'email', 'telefone', 'cargo', 'acoes'];
@@ -69,7 +69,10 @@ export class FuncionarioComponent implements OnInit {
   }
 
   salvar(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // mostra erros nos campos inválidos
+      return;
+    }
 
     const funcionario: FuncionarioRequest = this.form.value;
 
@@ -92,6 +95,7 @@ export class FuncionarioComponent implements OnInit {
       });
     }
   }
+
 
   editar(func: FuncionarioResponse): void {
     this.editUuid = func.uuid;

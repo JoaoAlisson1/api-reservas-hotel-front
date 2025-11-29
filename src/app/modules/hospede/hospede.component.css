@@ -1,6 +1,7 @@
+
 .container {
   max-width: 900px;
-  margin: 0 auto;
+  margin: auto;
   padding: 20px;
 }
 
@@ -9,20 +10,48 @@
   margin-bottom: 15px;
 }
 
-.mat-table {
+.btn-criar {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-criar:hover {
+  background-color: #45a049;
+}
+
+.reservas-table {
   width: 100%;
   margin-top: 20px;
+  border-collapse: collapse;
 }
 
-button {
-  margin-right: 10px;
+.reservas-table tr:nth-child(even) td {
+  background-color: #f2f2f2;
 }
 
-/* Destacar os botões de ação */
-button[color="accent"] mat-icon {
-  color: #1976d2; /* azul */
+.reservas-table tr:nth-child(odd) td {
+  background-color: #ffffff;
 }
 
-button[color="warn"] mat-icon {
-  color: #d32f2f; /* vermelho */
+.reservas-table th.mat-header-cell {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+}
+
+
+.reservas-table td.mat-cell {
+  padding: 8px;
+}
+
+mat-icon {
+  font-size: 22px;
+}
+
+button.mat-icon-button {
+  margin-right: 8px;
 }

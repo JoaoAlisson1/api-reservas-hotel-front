@@ -1,24 +1,43 @@
 <div class="container-fluid">
   <mat-toolbar color="primary" class="d-flex justify-content-between align-items-center">
 
-    <!-- Esquerda -->
     <div class="toolbar-left">
       <span class="fw-bold fs-5">Dormez Hoteis</span>
     </div>
 
-    <!-- Centro (menu principal) -->
-    <div class="toolbar-center d-none d-md-flex gap-3">
-      <button mat-button routerLink="/home/dashboard">Dashboard</button>
-      <button mat-button routerLink="/home/usuario">Usuários</button>
-      <button mat-button routerLink="/home/funcionario">Funcionários</button>
-      <button mat-button routerLink="/home/hospede">Hóspedes</button>
-      <button mat-button routerLink="/home/reservas">Reservas</button>
-      <button mat-button routerLink="/home/quartos">Quartos</button>
-      <!-- Adicione mais opções futuramente -->
+    <div class="toolbar-center d-none d-md-flex gap-2">
+      <button mat-button routerLink="/home/dashboard" routerLinkActive="active-menu">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
+
+      <button mat-button routerLink="/home/usuario" routerLinkActive="active-menu">
+        <mat-icon>person</mat-icon>
+        Usuários
+      </button>
+
+      <button mat-button routerLink="/home/funcionario" routerLinkActive="active-menu">
+        <mat-icon>people</mat-icon>
+        Funcionários
+      </button>
+
+      <button mat-button routerLink="/home/hospede" routerLinkActive="active-menu">
+        <mat-icon>person_outline</mat-icon>
+        Hóspedes
+      </button>
+
+      <button mat-button routerLink="/home/reservas" routerLinkActive="active-menu" matBadge="3" matBadgeColor="warn">
+        <mat-icon>calendar_today</mat-icon>
+        Reservas
+      </button>
+
+      <button mat-button routerLink="/home/quartos" routerLinkActive="active-menu">
+        <mat-icon>house</mat-icon>
+        Quartos
+      </button>
     </div>
 
-    <!-- Direita (ações rápidas) -->
-    <div class="toolbar-right d-flex gap-3">
+    <div class="toolbar-right d-flex gap-2">
       <button mat-icon-button matTooltip="Página inicial" routerLink="/home/dashboard">
         <mat-icon>home</mat-icon>
       </button>

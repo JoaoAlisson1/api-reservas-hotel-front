@@ -14,14 +14,14 @@ import { provideBrowserGlobalErrorListeners } from '@angular/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule  // <-- essencial para HttpClient
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true   // permite múltiplos interceptors
+      multi: true
     }
   ],
   bootstrap: [App]

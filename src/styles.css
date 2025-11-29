@@ -1,11 +1,8 @@
-/* 1. CORREÇÃO UNIVERSAL DO Z-INDEX */
-/* Garante que o contêiner de todos os pop-ups (overlays) . */
+
 .cdk-overlay-container {
   z-index: 9999 !important;
 }
 
-/* 2. CORREÇÃO DA COR DE FUNDO DOS ELEMENTOS FLUTUANTES */
-/* Força o fundo branco para todos os painéis relevantes do Material */
 
 /* Painel de seleção (mat-select) */
 .mat-select-panel {
@@ -24,6 +21,13 @@
 
 
 .cdk-overlay-pane {
-  background-color: white; /* Geralmente não precisa de !important aqui */
+  background-color: white;
 }
+
+/* Aplica borda preta ao popup do MatDatepicker */
+.mat-datepicker-content {
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
 

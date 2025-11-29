@@ -94,9 +94,13 @@ export class ReservaComponent implements OnInit {
   }
 
   salvar(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // exibe erros nos campos
+      return;
+    }
 
     const reserva: ReservaRequest = this.form.value;
+
 
     if (this.editUuid) {
       this.reservaService.atualizar(this.editUuid, reserva).subscribe({
@@ -104,17 +108,20 @@ export class ReservaComponent implements OnInit {
           this.listarReservas();
           this.form.reset();
           this.editUuid = null;
-        }
+        },
+        error: err => console.error(err)
       });
     } else {
       this.reservaService.criar(reserva).subscribe({
         next: () => {
           this.listarReservas();
           this.form.reset();
-        }
+        },
+        error: err => console.error(err)
       });
     }
   }
+
 
   editar(r: ReservaResponse): void {
     this.editUuid = r.uuid;

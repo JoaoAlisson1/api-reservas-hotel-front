@@ -1,5 +1,6 @@
 .container {
   max-width: 900px;
+  margin: auto;
 }
 
 .full {
@@ -7,9 +8,42 @@
   margin-bottom: 15px;
 }
 
+.btn-criar {
+  background-color: #4CAF50; /* verde */
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-criar:hover {
+  background-color: #45a049;
+}
+
 table {
   width: 100%;
   margin-top: 20px;
+  border-collapse: collapse;
+}
+
+
+.reservas-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.reservas-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+
+.reservas-table th {
+  background-color: #3f51b5;
+  color: white;
+  text-align: left;
+  padding: 8px;
+}
+
+.reservas-table td {
+  padding: 8px;
 }
 
 mat-icon {
@@ -17,5 +51,5 @@ mat-icon {
 }
 
 button {
-  margin-right: 10px;
+  margin-right: 8px;
 }

@@ -1,0 +1,22 @@
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.card mat-icon {
+  font-size: 2rem;
+  color: #0d6efd;
+}
+
+.card-title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+

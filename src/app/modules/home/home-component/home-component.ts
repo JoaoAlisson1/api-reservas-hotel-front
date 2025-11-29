@@ -22,7 +22,7 @@ import { CommonModule, NgForOf } from '@angular/common';
     NgFor
   ],
   templateUrl: './home-component.html',
-  styleUrls: ['./home-component.css'],// observar
+  styleUrls: ['./home-component.css'],
 })
 export class HomeComponent {
   constructor(private authService: AuthService) {}

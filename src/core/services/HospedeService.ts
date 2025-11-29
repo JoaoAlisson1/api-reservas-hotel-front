@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HospedeRequest } from '../models/HospedeRequest';
 import { HospedeResponse } from '../models/HospedeResponse';
-import { env } from '../../environment/environment';  // igual ao QuartoService
+import { env } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HospedeService {
 
-  private baseUrl = `${env.apiUrl}/hospede`;  // ⬅️ usando o mesmo padrão
+  private baseUrl = `${env.apiUrl}/hospede`;
 
   constructor(private http: HttpClient) {}
 

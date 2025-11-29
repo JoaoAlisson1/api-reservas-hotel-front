@@ -1,14 +1,13 @@
-/* Container principal: centralizado vertical e horizontalmente */
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f5f7fa; /* fundo leve */
+  background: #f5f7fa;
   font-family: 'Roboto', sans-serif;
 }
 
-/* Card */
 .card {
   background: #ffffff;
   border-radius: 12px;
@@ -22,7 +21,6 @@
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Título */
 h3 {
   font-weight: 700;
   color: #1a1a1a;
@@ -30,24 +28,23 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
-/* Inputs Material */
 .mat-form-field {
   width: 100%;
 }
 
 .mat-form-field.mat-focused .mat-form-field-outline {
-  color: #3f51b5; /* cor do foco */
+  color: #3f51b5;
   border-color: #3f51b5;
 }
 
-/* Ícones dos inputs */
+
 mat-icon {
   color: #757575;
 }
 
-/* Botão de login customizado */
+
 .btn-login {
-  background-color: #ff5722; /* laranja vibrante */
+  background-color: #ff5722;
   color: white;
   font-weight: 600;
   font-size: 16px;
@@ -58,12 +55,12 @@ mat-icon {
 }
 
 .btn-login:hover {
-  background-color: #e64a19; /* laranja mais escuro */
+  background-color: #e64a19;
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
   transform: translateY(-2px);
 }
 
-/* Botão de mostrar/ocultar senha */
+
 .mat-icon-button {
   color: #757575;
   transition: color 0.3s;
@@ -73,7 +70,7 @@ mat-icon {
   color: #3f51b5;
 }
 
-/* Link de registro */
+
 .text-center small {
   color: #616161;
 }

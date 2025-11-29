@@ -26,7 +26,7 @@ import { HospedeResponse } from '../../../core/models/HospedeResponse';
     MatTableModule,
     MatSelectModule,
     MatOptionModule,
-    MatIconModule  // ✅ ícones do Angular Material
+    MatIconModule
   ],
   styleUrls: ['./hospede.component.css']
 })
@@ -58,9 +58,13 @@ export class HospedeComponent implements OnInit {
   }
 
   salvar(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // força a exibição dos erros nos campos
+      return;
+    }
 
     const hospede: HospedeRequest = this.form.value;
+
 
     if (this.editUuid) {
       this.hospedeService.atualizar(this.editUuid, hospede).subscribe({
@@ -81,6 +85,7 @@ export class HospedeComponent implements OnInit {
       });
     }
   }
+
 
   editar(hospede: HospedeResponse): void {
     this.editUuid = hospede.uuid;

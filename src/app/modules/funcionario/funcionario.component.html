@@ -13,7 +13,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Email -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" placeholder="email@empresa.com">
@@ -25,7 +24,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Telefone -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Telefone</mat-label>
       <input matInput formControlName="telefone" placeholder="(99) 99999-9999">
@@ -34,7 +32,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Cargo -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Cargo</mat-label>
       <mat-select formControlName="cargo">
@@ -47,12 +44,10 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Botões -->
-    <button mat-raised-button color="primary" type="submit">
+    <button mat-raised-button class="btn-criar" type="submit">
       {{ editUuid ? 'Atualizar' : 'Criar' }}
     </button>
-
-    <button *ngIf="editUuid" mat-button (click)="editUuid = null; form.reset()">
+    <button *ngIf="editUuid" mat-button type="button" (click)="editUuid = null; form.reset()">
       Cancelar
     </button>
 
@@ -61,34 +56,28 @@
   <hr />
 
   <h3>Lista de Funcionários</h3>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full funcionarios-table">
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full">
-
-    <!-- Nome -->
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef>Nome</th>
       <td mat-cell *matCellDef="let f">{{ f.nome }}</td>
     </ng-container>
 
-    <!-- Email -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef>Email</th>
       <td mat-cell *matCellDef="let f">{{ f.email }}</td>
     </ng-container>
 
-    <!-- Telefone -->
     <ng-container matColumnDef="telefone">
       <th mat-header-cell *matHeaderCellDef>Telefone</th>
       <td mat-cell *matCellDef="let f">{{ f.telefone }}</td>
     </ng-container>
 
-    <!-- Cargo -->
     <ng-container matColumnDef="cargo">
       <th mat-header-cell *matHeaderCellDef>Cargo</th>
       <td mat-cell *matCellDef="let f">{{ f.cargo }}</td>
     </ng-container>
 
-    <!-- Ações -->
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let f">

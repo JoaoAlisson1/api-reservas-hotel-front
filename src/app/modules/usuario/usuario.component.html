@@ -1,14 +1,11 @@
 <div class="container mt-4">
-
   <h3>Gerenciar Usuários</h3>
 
   <form [formGroup]="form" (ngSubmit)="salvar()" class="mb-4">
 
-    <!-- LOGIN -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Email (Login)</mat-label>
       <input matInput placeholder="email@dominio.com" formControlName="login">
-
       <mat-error *ngIf="form.get('login')?.hasError('required') && (form.get('login')?.touched || form.get('login')?.dirty)">
         O login é obrigatório.
       </mat-error>
@@ -17,80 +14,59 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- SENHA -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Senha</mat-label>
       <input matInput type="password" placeholder="Senha" formControlName="senha">
-
       <mat-error *ngIf="form.get('senha')?.hasError('required') && (form.get('senha')?.touched || form.get('senha')?.dirty)">
         A senha é obrigatória.
       </mat-error>
     </mat-form-field>
 
-    <!-- PERMISSÃO -->
     <mat-form-field appearance="outline" class="full">
       <mat-label>Permissão</mat-label>
       <input matInput placeholder="Ex: ADMIN, RECEPCIONISTA..." formControlName="permissao">
-
       <mat-error *ngIf="form.get('permissao')?.hasError('required') && (form.get('permissao')?.touched || form.get('permissao')?.dirty)">
         A permissão é obrigatória.
       </mat-error>
     </mat-form-field>
 
-    <!-- BOTÕES -->
-    <button mat-raised-button color="primary" type="submit">
+    <button mat-raised-button class="btn-criar" type="submit">
       {{ editId ? 'Atualizar' : 'Criar' }}
     </button>
-
-    <button *ngIf="editId"
-            mat-button
-            type="button"
-            (click)="editId = null; form.reset()">
-      Cancelar
-    </button>
+    <button *ngIf="editId" mat-button type="button" (click)="editId = null; form.reset()">Cancelar</button>
 
   </form>
 
   <hr />
 
-  <!-- TABELA -->
   <h3>Lista de Usuários</h3>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 usuarios-table">
 
-    <!-- LOGIN -->
     <ng-container matColumnDef="login">
       <th mat-header-cell *matHeaderCellDef>Login</th>
       <td mat-cell *matCellDef="let u">{{ u.login }}</td>
     </ng-container>
 
-    <!-- PERMISSÃO -->
     <ng-container matColumnDef="permissao">
       <th mat-header-cell *matHeaderCellDef>Permissão</th>
       <td mat-cell *matCellDef="let u">{{ u.permissao }}</td>
     </ng-container>
 
-    <!-- AÇÕES -->
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let u">
-
-        <!-- Editar -->
         <button mat-icon-button color="accent" (click)="editar(u)">
           <mat-icon>edit</mat-icon>
         </button>
-
-        <!-- Excluir -->
         <button mat-icon-button color="warn" (click)="deletar(u.id!)">
           <mat-icon>delete</mat-icon>
         </button>
-
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
-
 </div>

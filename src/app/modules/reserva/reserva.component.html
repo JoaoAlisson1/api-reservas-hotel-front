@@ -79,7 +79,9 @@
     </mat-form-field>
 
     <!-- Botões -->
-    <button mat-raised-button color="primary">{{ editUuid ? 'Atualizar' : 'Criar' }}</button>
+    <button mat-raised-button class="btn-criar">
+      {{ editUuid ? 'Atualizar' : 'Criar' }}
+    </button>
     <button *ngIf="editUuid" mat-button (click)="editUuid = null; form.reset();">
       Cancelar
     </button>
@@ -90,7 +92,7 @@
 
   <!-- Lista de Reservas -->
   <h3>Lista de Reservas</h3>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full reservas-table">
 
     <ng-container matColumnDef="checkIn">
       <th mat-header-cell *matHeaderCellDef>Check-In</th>
@@ -130,7 +132,8 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
+
 </div>
